@@ -1,0 +1,30 @@
+USE [dashboardDB]
+GO
+
+/****** Object:  Table [dbo].[user_auth]    Script Date: 2/15/2023 12:56:18 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[user_auth](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[userid] [varchar](30) NOT NULL,
+	[password] [varchar](20) NOT NULL,
+	[role_type] [varchar](20) NOT NULL,
+	[first_name] [varchar](20) NOT NULL,
+	[middle_name] [varchar](20) NULL,
+	[last_name] [varchar](20) NULL,
+	[mobile] [varchar](20) NOT NULL,
+	[nid] [varchar](20) NULL,
+	[wing] [varchar](20) NOT NULL,
+	[position] [varchar](30) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[userid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
