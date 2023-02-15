@@ -1,0 +1,33 @@
+1. Create new user is in git-HUB
+2. Userid: shahana.yc@gmail.com or shahana.yc
+3. pass: ........1A
+4. Top right corner press plus sign(+) -> select New repository.
+5. give name new repository "new-repo_name"
+
+6. Now go to PC folder location of source code.
+7. Create same name as "new-repo_name" 
+8. open folder "new-repo_name"
+9. Paste your source code here "new-repo_name"
+10. mouse-click-right-button -> press Git Bash here
+11. Then follow below steps
+
+
+or create a new repository on the command line
+===============================================
+git init
+git add .
+git status
+git commit -m "first commit"
+git branch -M main
+git status
+git remote add origin https://github.com/shahanayc/temp.git
+git push -u origin main
+
+
+
+…or push an existing repository from the command line
+=====================================================
+git remote add origin https://github.com/shahanayc/temp.git
+git branch -M main
+git push -u origin main
+

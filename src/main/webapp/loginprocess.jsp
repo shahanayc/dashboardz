@@ -14,9 +14,12 @@ session.setAttribute("session","TRUE");
 }
 else
 {
-out.print("Sorry, email or password error");
+out.print("Sorry, Wrong userid or password");
 %>
+<%--<script>alert("Sorry, Wrong userid or password..............");--%>
+<%--</script>--%>
 <jsp:include page="index.jsp"></jsp:include>
+
 <%
 }
 %>

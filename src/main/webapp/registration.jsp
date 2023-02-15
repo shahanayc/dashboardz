@@ -37,7 +37,7 @@
                 <div class="col-md-4 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" />
+                    <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" required >
                     <label class="form-label" for="firstName">First Name</label>
                   </div>
 
@@ -45,7 +45,7 @@
                 <div class="col-md-4 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="middleName" name="middleName" class="form-control form-control-lg" />
+                    <input type="text" id="middleName" name="middleName" class="form-control form-control-lg" >
                     <label class="form-label" for="middleName">Middle Name</label>
                   </div>
 
@@ -53,7 +53,7 @@
                 <div class="col-md-4 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" />
+                    <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" >
                     <label class="form-label" for="lastName">Last Name</label>
                   </div>
                 </div>
@@ -62,14 +62,14 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="mobile" name="mobile" class="form-control form-control-lg" />
+                    <input type="text" id="mobile" name="mobile" class="form-control form-control-lg" required>
                     <label class="form-label" for="mobile">Mobile No</label>
                   </div>
 
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="nid" name="nid" class="form-control form-control-lg" />
+                    <input type="text" id="nid" name="nid" class="form-control form-control-lg" required >
                     <label class="form-label" for="nid">NID</label>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                 <div class="row">
                   <div class="col-12">
                     <label class="form-label select-label">Choose Position</label>
-                    <select id="position" name="position" class="select form-control-lg">
+                    <select id="position" name="position" class="select form-control-lg" required>
                       <option value="" >Choose Position</option>
                       <option value="1">Chairman</option>
                       <option value="2">Member</option>
@@ -122,7 +122,7 @@
               <div class="row">
                 <div class="col-12">
                   <label class="form-label select-label">Choose Wing</label>
-                  <select id="wing" name="wing" class="select form-control-lg">
+                  <select id="wing" name="wing" class="select form-control-lg" required>
                     <option value="" >Choose Wing</option>
                     <option value="i">ICT</option>
                     <option value="v">VAT</option>
@@ -137,7 +137,7 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div class="form-outline">
-                    <input type="text" id="userName" name="userName" class="form-control form-control-lg" />
+                    <input type="text" id="userName" name="userName" class="form-control form-control-lg" required>
                     <label class="form-label" for="userName">User ID</label>
                   </div>
 
@@ -145,7 +145,7 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div class="form-outline">
-                    <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                    <input type="password" id="password" name="password" class="form-control form-control-lg" required>
                     <label class="form-label" for="password">Password</label>
 
                   </div>

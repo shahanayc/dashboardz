@@ -21,11 +21,11 @@
 <%
     boolean status=registerDao.saveDataRegister(registerForm);
     if(status){
-        out.println("1 row affected");
+        out.println("You are registered successfully");
         session.setAttribute("session","TRUE");
     }
     else {
-        out.print("Sorry, email or password error");
+        out.print("Duplicate Userid");
     }
 %>
 <jsp:include page="index.jsp"></jsp:include>

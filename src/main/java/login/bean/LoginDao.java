@@ -3,6 +3,8 @@ package login.bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class LoginDao {
     public LoginDao() {
@@ -29,7 +31,13 @@ public class LoginDao {
             System.out.println(eData.getRoleType()+" "+eData.getUserName()+" "+eData.getPassword());
 
             status = new String(eData.getRoleType());//rs.next();
-        } catch (Exception var5) {
+        } catch (SQLException e) {
+            System.err.format("Login Dao : SQL State: %s\n%s : %s", e.getSQLState(), e.getMessage(), e.getErrorCode());
+            messageAlert.setLoginMsgID(1);
+            messageAlert.setLoginErrorMsg("Wrong Id or Password! Please try again.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return status;

@@ -7,7 +7,7 @@ public class registerBean implements java.io.Serializable {
     private String mobile = null;
     private String nid = null;
     private String wing = null;
-    private String position = null;
+    private String position = "1";
 //    private int age = 0;
     private String userName = null;
     private String password = null;

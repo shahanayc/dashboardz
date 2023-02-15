@@ -1,5 +1,6 @@
 <%@ page import = "java.io.*,java.util.*" %>
 <%@ page import="api.eTINCountApi"%>
+<%@ page import="login.bean.messageAlert"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +75,11 @@
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                                     <div class="form-outline mb-4">
+                                        <p class="text-danger">
+                                        <% if(messageAlert.getLoginMsgID()==1){
+                                            out.print(messageAlert.getLoginErrorMsg());
+                                        messageAlert.setLoginMsgID(0);} %>
+                                        </p>
                                         <input type="text" name="userName" id="userName" class="form-control form-control-lg" />
                                         <label class="form-label" for="userName">User ID</label>
                                     </div>
