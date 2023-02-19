@@ -76,16 +76,16 @@
 
                                     <div class="form-outline mb-4">
                                         <p class="text-danger">
-                                        <% if(messageAlert.getLoginMsgID()==1){
+                                        <% if(messageAlert.getLoginMsgID()>0){
                                             out.print(messageAlert.getLoginErrorMsg());
                                         messageAlert.setLoginMsgID(0);} %>
                                         </p>
-                                        <input type="text" name="userName" id="userName" class="form-control form-control-lg" />
+                                        <input type="text" name="userName" id="userName" class="form-control form-control-lg" required>
                                         <label class="form-label" for="userName">User ID</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" name="password" id="password" class="form-control form-control-lg" />
+                                        <input type="password" name="password" id="password" class="form-control form-control-lg" required>
                                         <label class="form-label" for="password">Password</label>
                                     </div>
 

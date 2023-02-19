@@ -34,7 +34,6 @@ public class LoginDao {
         } catch (SQLException e) {
             System.err.format("Login Dao : SQL State: %s\n%s : %s", e.getSQLState(), e.getMessage(), e.getErrorCode());
             messageAlert.setLoginMsgID(1);
-            messageAlert.setLoginErrorMsg("Wrong Id or Password! Please try again.");
 
         } catch (Exception e) {
             e.printStackTrace();

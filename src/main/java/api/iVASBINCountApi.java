@@ -16,11 +16,11 @@ public class iVASBINCountApi {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private static String TOKEN ;
-    private static final String GET_URL = "http://103.92.84.243/api/NbrDashboard/1.0/count-tin-reg-till-date";
+    private static final String GET_URL = "https://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenueSet(TIMESTAMP='')?$format=json";
 
     private static final String POST_URL = "http://103.92.84.243/api/Auth/token";
 
-    private static final String POST_PARAMS = "{  'UserName':'admin@nbrdashboard.com', 'Password':'1234' }";
+    private static final String POST_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#' }";
 
     private static final String GET_PARAMS = " ";
 
@@ -47,10 +47,11 @@ public class iVASBINCountApi {
 //    }
 
     public static int getBinCountTillToday() throws IOException {
-        sendPOST();
+        //sendPOST();
         System.out.println("POST DONE");
         sendGET();
         System.out.println("GET DONE");
+        System.out.println("ivas BIN API Get calllll %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*******");
         return 372000;//binCountTillToday;
     }
     public static int getBinCountRange() throws IOException {
@@ -73,14 +74,14 @@ public class iVASBINCountApi {
 
     public static void sendGET() throws IOException {
 
-        TOKEN = TOKEN.substring(1,TOKEN.length()-1);
-        System.out.println("This" + TOKEN);
+        //TOKEN = TOKEN.substring(1,TOKEN.length()-1);
+        //System.out.println("This" + TOKEN);
 
         URL obj = new URL(GET_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type","application/json");
-        con.setRequestProperty("Authorization", "Bearer " + TOKEN );
+        con.setRequestProperty("Authorization", "Basic Auth" );
 
         int responseCode = con.getResponseCode();
         System.out.println("GET Response Code :: " + responseCode);

@@ -23,12 +23,19 @@
     if(status){
         out.println("You are registered successfully");
         session.setAttribute("session","TRUE");
+        %>
+<jsp:include page="index.jsp"></jsp:include>
+<%
     }
     else {
         out.print("Duplicate Userid");
+
+%>
+<jsp:include page="registration.jsp"></jsp:include>
+<%
     }
 %>
-<jsp:include page="index.jsp"></jsp:include>
+%>
 
 <%--<p> Name:--%>
 <%--    <jsp:getProperty name = "registerForm" property = "firstName"/> &nbsp--%>

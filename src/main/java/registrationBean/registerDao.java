@@ -2,6 +2,7 @@ package registrationBean;
 
 import login.bean.ConnectionProvider;
 import login.bean.LoginBean;
+import login.bean.messageAlert;
 import registrationBean.registerBean;
 
 import java.sql.Connection;
@@ -20,6 +21,7 @@ public class registerDao {
             Connection con = ConnectionProvider.getCon();
 //            PreparedStatement ps = con.prepareStatement("select * from user_auth where email=? and pass=?");
             PreparedStatement ps = con.prepareStatement("INSERT INTO user_auth (userid,password, role_type, first_name, last_name, middle_name,mobile,nid,wing, position) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            FixedData.setRegBean(bean); //To hold the registration data given by user.
             ps.setString(1, bean.getUserName());
             ps.setString(2, bean.getPassword());
             ps.setString(3, bean.getWing()); //role_type
@@ -42,7 +44,9 @@ public class registerDao {
             System.out.println(row); //1
             status = true;
         } catch (SQLException e) {
-            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            System.err.format("SQL State: %s\n%s: %s", e.getSQLState(), e.getMessage(),  e.getErrorCode());
+            messageAlert.setRegistrationMsgID(1); //duplicate userid
+
         } catch (Exception e) {
             e.printStackTrace();
         }
