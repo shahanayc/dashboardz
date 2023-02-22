@@ -94,19 +94,19 @@
                 <p>BIN Registration up-to-date          :
                     <%
                         //int etinCount = com.example.demo3.apiConEtinCount.getETinCountTillDate();
-                        out.print(api.iVASBINCountApi.getBinCountTillToday());
+                        out.print(api.iVASBINCountApi.getBinCountTillToday() +" (real)");
                     %>
                 </p>
                 <p>BIN Registration Done in Above Period:
                     <% out.print(api.iVASBINCountApi.getBinCountRange()); %>
                 </p>
                 <p>Return Submitted last month          :
-                    <% out.print(api.iVASBINCountApi.getReturnCount()); %>
+                    <% out.print(api.iVASBINCountApi.getReturnCount() +" (real)"); %>
                 </p>
-                <p>Revenue Collected last month         :
+                <p>Revenue Collected up-to-date        :
                     <% out.print(api.iVASBINCountApi.getIvasCollectionMon()+" BDT"); %> </p>
                 <p>Cumulative Revenue Collected This FY :
-                    <% out.print(api.iVASBINCountApi.getIvasCollectionFY()+" BDT"); %> </p>
+                    <% out.print(api.iVASByDateRangeApi.getIvasCollectionFY()+" BDT"); %> </p>
                 <p> IBAS++ Collections                  :
                     <% out.print(api.iVASBINCountApi.getIvasIBASCollection()+" BDT"); %></p>
             </div>

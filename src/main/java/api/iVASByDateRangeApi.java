@@ -11,26 +11,18 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class iVASBINCountApi {
+public class iVASByDateRangeApi {
 
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private static String TOKEN ;
-    private static final String GET_URL = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenueSet(TIMESTAMP='13.02.2023%2015%3A38%3A06')?$format=json";
+    private static final String GET_URL = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='{20220101}',END_DATE='{20221231})?$format=json";
 
     private static final String POST_URL = "http://103.92.84.243/api/Auth/token";
 
-    private static final String POST_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#' }";
-    private static final String GET_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#' }";
+    private static final String POST_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#$' }";
+    private static final String GET_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#$' }";
 
-    //private static final String GET_PARAMS = " ";
-
-    private static int binCountTillToday;
-    private static int returnCount;
-    private static int binCountRange;
-    private static int ivasCollectionMon;
-    private static int ivasCollectionFY;
-    private static int ivasIBASCollection;
     private static int TOTAL_BIN_VAT;
     private static int TOTAL_BIN_TOT;
     private static int TOTAL_RETURN_9_1;
@@ -44,23 +36,16 @@ public class iVASBINCountApi {
 //        return eTinCountTillToday;
 //    }
 
-    public iVASBINCountApi(){
+    public iVASByDateRangeApi(){
 
     }
-//    public static void main(String[] args) throws IOException {
-//
-//        sendPOST();
-//        System.out.println("POST DONE");
-//        sendGET();
-//        System.out.println("GET DONE");
-//    }
 
-    public static int getBinCountTillToday() throws IOException {
+    public static int getIvasCollectionFY() throws IOException {
         //sendPOST();
-        System.out.println("POST DONE");
+        System.out.println("POST NOO Need here for Basic Auth");
         sendGET();
         System.out.println("GET DONE");
-        System.out.println("ivas BIN API Get calllll %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*******");
+        System.out.println("ivas BIN API Get calllll for Fiscal Year");
         return (TOTAL_BIN_VAT+TOTAL_BIN_TOT);//binCountTillToday;
     }
     public static int getBinCountRange() throws IOException {
@@ -73,10 +58,7 @@ public class iVASBINCountApi {
         return (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
 
     }
-    public static int getIvasCollectionFY() throws IOException {
-        return 0;//ivasCollectionFY;
 
-    }
     public static double getIvasIBASCollection() throws IOException {
         return 0;
     }
