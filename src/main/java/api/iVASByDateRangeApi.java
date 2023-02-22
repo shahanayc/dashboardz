@@ -16,7 +16,7 @@ public class iVASByDateRangeApi {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private static String TOKEN ;
-    private static final String GET_URL = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='{20220101}',END_DATE='{20221231})?$format=json";
+    private static final String GET_URL = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='20220101',END_DATE='20221231')?$format=json";
 
     private static final String POST_URL = "http://103.92.84.243/api/Auth/token";
 
@@ -40,7 +40,7 @@ public class iVASByDateRangeApi {
 
     }
 
-    public static int getIvasCollectionFY() throws IOException {
+    public static int getIvasRegistrationFY() throws IOException {
         //sendPOST();
         System.out.println("POST NOO Need here for Basic Auth");
         sendGET();
@@ -54,7 +54,7 @@ public class iVASByDateRangeApi {
     public static int getReturnCount() throws IOException {
         return   (TOTAL_RETURN_9_1+TOTAL_RETURN_9_2);
     }
-    public static double getIvasCollectionMon() throws IOException {
+    public static double getIvasCollectionFY() throws IOException {
         return (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
 
     }
@@ -169,7 +169,7 @@ public class iVASByDateRangeApi {
 
 
             stPos = response.indexOf("TOTAL_AMOUNT_A_CHALLAN")+25; //Payment collection by Bangladesh bank
-            endPos = response.indexOf("TIMESTAMP")-3;
+            endPos = response.indexOf("TIMESTAMP", stPos)-3;
             System.out.println("Start point: "+stPos +", end point: "+endPos);
             char aChallanCountCh[] = new char[14];
             String aChallanCountStr = new String();

@@ -98,7 +98,7 @@
                     %>
                 </p>
                 <p>BIN Registration Done in Above Period:
-                    <% out.print(api.iVASBINCountApi.getBinCountRange()); %>
+                    <% out.print(api.iVASByDateRangeApi.getIvasRegistrationFY()); %>
                 </p>
                 <p>Return Submitted last month          :
                     <% out.print(api.iVASBINCountApi.getReturnCount() +" (real)"); %>
