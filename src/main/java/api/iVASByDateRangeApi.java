@@ -48,7 +48,7 @@ public class iVASByDateRangeApi {
     public static int getIvasRegistrationFY() throws IOException {
         //sendPOST();
         System.out.println("POST NOO Need here for Basic Auth");
-        //sendGET();
+        sendGET();
         System.out.println("GET DONE");
         System.out.println("ivas BIN API Get calllll for Fiscal Year");
         return (TOTAL_BIN_VAT+TOTAL_BIN_TOT);//binCountTillToday;
@@ -58,7 +58,7 @@ public class iVASByDateRangeApi {
     }
 
     public static int getReturnCountLastMon()throws IOException {
-        //sendGetLastMon();
+        sendGetLastMon();
 
         return   (TOTAL_RETURN_9_1LM+TOTAL_RETURN_9_2LM);
     }

@@ -42,6 +42,13 @@
         </div>
     </div>
 </nav>
+
+<%--<label for="birthday">Test:</label>--%>
+<%--<input type="date" id="birthday" name="birthday">--%>
+<%--<input type="submit">--%>
+
+
+
 <%--<div>--%>
 <%--    &nbsp;<div class="content">--%>
 <%--    <div class="container text-left">--%>
@@ -51,13 +58,13 @@
                     <div class="col-auto">
                         <div class="form-group">
                             <label for="input_from">From</label>
-                            <input type="text" class="form-control" id="input_from" placeholder="Start Date">
+                            <input type="date" class="form-control" id="input_from" placeholder="Start Date">
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-group">
                             <label for="input_to">To</label>
-                            <input type="text" class="form-control" id="input_to" placeholder="End Date">
+                            <input type="date" class="form-control" id="input_to" placeholder="End Date">
                         </div>
                     </div>
 
