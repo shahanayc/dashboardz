@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 public class iVASByDateRangeApi {
 
@@ -27,6 +30,8 @@ public class iVASByDateRangeApi {
     private static int TOTAL_BIN_TOT;
     private static int TOTAL_RETURN_9_1;
     private static int TOTAL_RETURN_9_2;
+    private static int TOTAL_RETURN_9_1LM;
+    private static int TOTAL_RETURN_9_2LM;
     private static double TOTAL_AMOUNT_SONALI;
     private static double TOTAL_AMOUNT_BANGLADESH;
     private static double TOTAL_AMOUNT_A_CHALLAN;
@@ -43,7 +48,7 @@ public class iVASByDateRangeApi {
     public static int getIvasRegistrationFY() throws IOException {
         //sendPOST();
         System.out.println("POST NOO Need here for Basic Auth");
-        sendGET();
+        //sendGET();
         System.out.println("GET DONE");
         System.out.println("ivas BIN API Get calllll for Fiscal Year");
         return (TOTAL_BIN_VAT+TOTAL_BIN_TOT);//binCountTillToday;
@@ -51,11 +56,89 @@ public class iVASByDateRangeApi {
     public static int getBinCountRange() throws IOException {
         return 0;//binCountRange;
     }
-    public static int getReturnCount() throws IOException {
-        return   (TOTAL_RETURN_9_1+TOTAL_RETURN_9_2);
+
+    public static int getReturnCountLastMon()throws IOException {
+        //sendGetLastMon();
+
+        return   (TOTAL_RETURN_9_1LM+TOTAL_RETURN_9_2LM);
     }
-    public static double getIvasCollectionFY() throws IOException {
-        return (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
+    public static void sendGetLastMon() throws IOException {
+
+        LocalDate date = LocalDate.now();
+        Calendar cal = Calendar.getInstance();
+        int month = Calendar.MONTH;
+        String mm[] = {"", "01","02","03","04","05","06","07","08","09","10","11","12"};
+        String yr1 = String.valueOf(date.getYear());
+        System.out.println(date.getYear() +"year "+yr1);
+        String yr2 = yr1;
+        if(month==1) { yr1 = String.valueOf((Calendar.YEAR)-1)+"1201";yr2 = String.valueOf((Calendar.YEAR))+"1231";}
+        else {
+            month--;
+            yr1 = yr1+mm[month]+"01";
+            if(month==2) yr2 = yr2+mm[month]+"28";
+            else yr2 = yr2+mm[month]+"30";
+        }
+
+        String GET_URLLMon = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='"+yr1+"',END_DATE='"+yr2+"')?$format=json";
+
+        System.out.println("\nInside sendGetLastMon: \n Year1="+yr1+"Year 2: "+yr2 + "\n URL= "+GET_URLLMon);
+
+        URL obj = new URL(GET_URLLMon);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type","application/json");
+        con.setRequestProperty("Authorization", "Basic UmV2ZW51ZToxMjM0NTZhQDIwMjMjJA==" );
+
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.out.println(response.toString());
+
+            int stPos = response.indexOf("TOTAL_RETURN_9_1")+19; //Return submission Parsing 9.1
+            int endPos = response.indexOf("TOTAL_RETURN_9_2")-3;
+            System.out.println("Start point: "+stPos +", end point: "+endPos);
+            char ret91CountCh[] = new char[8];
+            String ret91CountStr = new String();
+            response.getChars(stPos,endPos, ret91CountCh,0);
+            for (int i = 0; i < endPos-stPos; i++) {
+                ret91CountStr +=ret91CountCh[i];
+            }
+            System.out.println("Ret count 9.1 str "+ret91CountStr);
+            TOTAL_RETURN_9_1LM=Integer.parseInt(ret91CountStr);
+            System.out.println("\n"+TOTAL_RETURN_9_1LM);
+
+            stPos = response.indexOf("TOTAL_RETURN_9_2")+19; //Return submission Parsing 9.2
+            endPos = response.indexOf("TOTAL_AMOUNT_SONALI")-3;
+            System.out.println("Start point: "+stPos +", end point: "+endPos);
+            char ret92CountCh[] = new char[8];
+            String ret92CountStr = new String();
+            response.getChars(stPos,endPos, ret92CountCh,0);
+            for (int i = 0; i < endPos-stPos; i++) {
+                ret92CountStr +=ret92CountCh[i];
+            }
+            System.out.println("Ret count 9.1 str "+ret92CountStr);
+            TOTAL_RETURN_9_2LM=Integer.parseInt(ret92CountStr);
+            System.out.println("\n"+TOTAL_RETURN_9_2LM);
+        } else {
+            System.out.println("returnCount Last Month : GET request did not work.");
+        }
+
+    }
+
+
+    public static String getIvasCollectionFY() throws IOException {
+        DecimalFormat decfor = new DecimalFormat("0.00");
+        double amount = (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN)/1000000000;
+        return decfor.format(amount);//(TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
 
     }
 

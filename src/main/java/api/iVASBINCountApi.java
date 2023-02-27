@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class iVASBINCountApi {
 
@@ -20,8 +21,8 @@ public class iVASBINCountApi {
 
     private static final String POST_URL = "http://103.92.84.243/api/Auth/token";
 
-    private static final String POST_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#' }";
-    private static final String GET_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#' }";
+    private static final String POST_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#$' }";
+    private static final String GET_PARAMS = "{  'UserName':'Revenue', 'Password':'123456a@2023#$' }";
 
     //private static final String GET_PARAMS = " ";
 
@@ -69,8 +70,10 @@ public class iVASBINCountApi {
     public static int getReturnCount() throws IOException {
         return   (TOTAL_RETURN_9_1+TOTAL_RETURN_9_2);
     }
-    public static double getIvasCollectionMon() throws IOException {
-        return (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
+    public static String getIvasCollectionMon() throws IOException {
+        DecimalFormat decfor = new DecimalFormat("0.00");
+        double amount = (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN)/1000000000;
+        return decfor.format(amount);//(TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
 
     }
     public static int getIvasCollectionFY() throws IOException {

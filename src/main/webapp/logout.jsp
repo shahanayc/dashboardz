@@ -20,7 +20,7 @@
 <body>
 
 <%
-session.setAttribute("session","TRUE");
+session.setAttribute("session","FALSE");
 %>
 
 <%@ include file="index.jsp" %>

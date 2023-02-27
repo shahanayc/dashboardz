@@ -60,6 +60,7 @@
                             <input type="text" class="form-control" id="input_to" placeholder="End Date">
                         </div>
                     </div>
+
                     <div class="col-auto">
                         <div class="form-group">
                             <p></p>
@@ -94,19 +95,19 @@
                 <p>BIN Registration up-to-date          :
                     <%
                         //int etinCount = com.example.demo3.apiConEtinCount.getETinCountTillDate();
-                        out.print(api.iVASBINCountApi.getBinCountTillToday() +" (real)");
+                        out.print(api.iVASBINCountApi.getBinCountTillToday() +" ");
                     %>
                 </p>
                 <p>BIN Registration Done in Above Period:
                     <% out.print(api.iVASByDateRangeApi.getIvasRegistrationFY()); %>
                 </p>
                 <p>Return Submitted last month          :
-                    <% out.print(api.iVASBINCountApi.getReturnCount() +" (real)"); %>
+                    <% out.print(api.iVASByDateRangeApi.getReturnCountLastMon() +" "); %>
                 </p>
                 <p>Revenue Collected up-to-date        :
-                    <% out.print(api.iVASBINCountApi.getIvasCollectionMon()+" BDT"); %> </p>
+                    <% out.print(api.iVASBINCountApi.getIvasCollectionMon()+" Crore BDT"); %> </p>
                 <p>Cumulative Revenue Collected This FY :
-                    <% out.print(api.iVASByDateRangeApi.getIvasCollectionFY()+" BDT"); %> </p>
+                    <% out.print(api.iVASByDateRangeApi.getIvasCollectionFY()+" Crore BDT"); %> </p>
                 <p> IBAS++ Collections                  :
                     <% out.print(api.iVASBINCountApi.getIvasIBASCollection()+" BDT"); %></p>
             </div>

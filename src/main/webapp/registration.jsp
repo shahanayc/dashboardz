@@ -148,6 +148,7 @@
                         }  %>
                   <select id="wing" name="wing" class="select form-control-lg" required>
                     <option value="" >Choose Wing</option>
+                      <option <% if(wng.equals("ch")){out.print("selected");}%> value="ch">Chairman's Office</option>
                     <option <% if(wng.equals("i")){out.print("selected");}%> value="i">ICT</option>
                     <option <% if(wng.equals("v")){out.print("selected");}%> value="v">VAT</option>
                     <option <% if(wng.equals("t")){out.print("selected");}%> value="t">TAX</option>

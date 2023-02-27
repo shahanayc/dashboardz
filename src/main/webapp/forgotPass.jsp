@@ -19,23 +19,23 @@
           <div class="mb-4">
             <h5>Forgot Password?</h5>
             <p class="mb-2">
-              <h4>Please communicate with ICT Wing, NBR.</h4>
+              <h4>Please communicate with Senior System Analyst, ICT Wing, NBR. Contact: 01310-593044</h4>
 
             </p>
           </div>
-          <form>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input disabled type="email" id="email" class="form-control" name="email" placeholder="Enter Your Email"
-                     required="">
-            </div>
-            <div class="mb-3 d-grid">
-              <button disabled type="submit" class="btn btn-primary">
-                Reset Password
-              </button>
-            </div>
-            <span>Don't have an account? <a href="registration.jsp"> Create Account</a></span>
-          </form>
+<%--          <form>--%>
+<%--            <div class="mb-3">--%>
+<%--              <label for="email" class="form-label">Email</label>--%>
+<%--              <input disabled type="email" id="email" class="form-control" name="email" placeholder="Enter Your Email"--%>
+<%--                     required="">--%>
+<%--            </div>--%>
+<%--            <div class="mb-3 d-grid">--%>
+<%--              <button disabled type="submit" class="btn btn-primary">--%>
+<%--                Reset Password--%>
+<%--              </button>--%>
+<%--            </div>--%>
+<%--            <span>Don't have an account? <a href="registration.jsp"> Create Account</a></span>--%>
+<%--          </form>--%>
         </div>
       </div>
     </div>

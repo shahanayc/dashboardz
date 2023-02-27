@@ -9,12 +9,12 @@
 //boolean status=LoginDao.validate(loginobj);
 String status=LoginDao.validate(loginobj);
 if(status!=null){
-out.println("You r successfully logged in");
+//out.println("You r successfully logged in");
 session.setAttribute("session","TRUE");
 }
 else
 {
-out.print("Sorry, Wrong userid or password");
+//out.print("Sorry, Wrong userid or password");
 %>
 <%--<script>alert("Sorry, Wrong userid or password..............");--%>
 <%--</script>--%>
@@ -29,8 +29,10 @@ out.print("Sorry, Wrong userid or password");
     String r2= "c";
     String r3= "t";
     String r4= "v";
+    String r5= "b";
+    String r6= "ch";
 //    out.println("revdashboard"+status);
-if(r1.equals(status)){
+if(r1.equals(status) || r5.equals(status) || r6.equals(status)){
 //    out.println("revdashboard");
     %>
 

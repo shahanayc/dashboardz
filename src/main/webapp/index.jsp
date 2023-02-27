@@ -32,14 +32,14 @@
 
 
 <%--<%@ include file="index.jsp" %>--%>
-<a href="userform.jsp">registration</a>|
-<a href="login.jsp">login</a>|
-<a href="logout.jsp">logout</a>|
-<a href="revdashboard.jsp">Dashboard</a>|||
+<%--<a href="userform.jsp">registration</a>|--%>
+<%--<a href="login.jsp">login</a>|--%>
+<%--<a href="logout.jsp">logout</a>|--%>
+<%--<a href="revdashboard.jsp">Dashboard</a>|||--%>
 
-<a href="dashBoardVat.jsp">VAT Dashboard</a>|
-<a href="dashBoardTax.jsp"> Tax Dashboard</a>|
-<a href="dashBoardCustom.jsp">Customs Dashboard</a>
+<%--<a href="dashBoardVat.jsp">VAT Dashboard</a>|--%>
+<%--<a href="dashBoardTax.jsp"> Tax Dashboard</a>|--%>
+<%--<a href="dashBoardCustom.jsp">Customs Dashboard</a>--%>
 
 <%
     String profile_msg=(String)request.getAttribute("profile_msg");
@@ -59,17 +59,21 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="img/NBR-building.jpg"
+                            <img src="img/NBR-Building0.jpg"
                                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
+                                <img src="img/logo.png"
+                                     alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
 
                                 <form id="loginobj" name ="loginobj" action="loginprocess.jsp" method="post">
 
+
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                        <span class="h1 fw-bold mb-0">Logo</span>
+
+<%--                                        <span class="h1 fw-bold mb-0">Logo</span>--%>
                                     </div>
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
