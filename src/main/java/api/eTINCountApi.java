@@ -64,8 +64,8 @@ public class eTINCountApi {
         return 65000;//TinCollectionMon;
 
     }
-    public static int getTinCollectionFY() throws IOException {
-        return 770023;//TinCollectionFY;
+    public static double getTinCollectionFY() throws IOException {
+        return 77000023;//TinCollectionFY;
 
     }
     public static int getTinIBASCollection() throws IOException {

@@ -15,6 +15,7 @@ session.setAttribute("session","TRUE");
 else
 {
 //out.print("Sorry, Wrong userid or password");
+    LoginDao.setRoleType(-1);
 %>
 <%--<script>alert("Sorry, Wrong userid or password..............");--%>
 <%--</script>--%>

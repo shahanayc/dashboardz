@@ -19,7 +19,7 @@ public class iVASByDateRangeApi {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private static String TOKEN ;
-    private static final String GET_URL = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='20220101',END_DATE='20221231')?$format=json";
+    private static final String GET_URL = globals.ivasApiUrl + "GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='20220101',END_DATE='20221231')?$format=json";
 
     private static final String POST_URL = "http://103.92.84.243/api/Auth/token";
 
@@ -46,11 +46,13 @@ public class iVASByDateRangeApi {
     }
 
     public static int getIvasRegistrationFY() throws IOException {
-        //sendPOST();
-        System.out.println("POST NOO Need here for Basic Auth");
-        sendGET();
-        System.out.println("GET DONE");
-        System.out.println("ivas BIN API Get calllll for Fiscal Year");
+        if(TOTAL_BIN_VAT+TOTAL_BIN_TOT==0) {
+            //sendPOST();
+            System.out.println("POST NOO Need here for Basic Auth");
+            sendGET();
+            System.out.println("GET DONE");
+            System.out.println("ivas BIN API Get calllll for Fiscal Year");
+        }
         return (TOTAL_BIN_VAT+TOTAL_BIN_TOT);//binCountTillToday;
     }
     public static int getBinCountRange() throws IOException {
@@ -58,8 +60,9 @@ public class iVASByDateRangeApi {
     }
 
     public static int getReturnCountLastMon()throws IOException {
-        sendGetLastMon();
-
+        if(TOTAL_RETURN_9_1LM+TOTAL_RETURN_9_2LM==0) {
+            sendGetLastMon();
+        }
         return   (TOTAL_RETURN_9_1LM+TOTAL_RETURN_9_2LM);
     }
     public static void sendGetLastMon() throws IOException {
@@ -79,7 +82,7 @@ public class iVASByDateRangeApi {
             else yr2 = yr2+mm[month]+"30";
         }
 
-        String GET_URLLMon = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='"+yr1+"',END_DATE='"+yr2+"')?$format=json";
+        String GET_URLLMon = globals.ivasApiUrl + "GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='"+yr1+"',END_DATE='"+yr2+"')?$format=json";
 
         System.out.println("\nInside sendGetLastMon: \n Year1="+yr1+"Year 2: "+yr2 + "\n URL= "+GET_URLLMon);
 
@@ -139,6 +142,13 @@ public class iVASByDateRangeApi {
         DecimalFormat decfor = new DecimalFormat("0.00");
         double amount = (TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN)/1000000000;
         return decfor.format(amount);//(TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN);
+
+    }
+
+    public static String getSummaryCollection()throws IOException {
+        DecimalFormat decfor = new DecimalFormat("0.000");
+        double amount = (eTINCountApi.getTinCollectionFY() + TOTAL_AMOUNT_SONALI+ TOTAL_AMOUNT_BANGLADESH + TOTAL_AMOUNT_A_CHALLAN)/1000000000;
+        return decfor.format(amount);
 
     }
 

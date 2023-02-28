@@ -54,17 +54,18 @@
 <%--    <div class="container text-left">--%>
         <div class="row justify-content-center">
             <div class="col-lg-7">
-                <form action="#" class="row">
+<%--                <form action="#" class="row">--%>
+                    <form class="row" id="DateSearchFormObj" name="DateSearchFormObj" method="post" action="dateWiseReportProcess.jsp">
                     <div class="col-auto">
                         <div class="form-group">
-                            <label for="input_from">From</label>
-                            <input type="date" class="form-control" id="input_from" placeholder="Start Date">
+                            <label for="date_from">From</label>
+                            <input type="date" class="form-control" name ="date_from" id="date_from" placeholder="Start Date">
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-group">
-                            <label for="input_to">To</label>
-                            <input type="date" class="form-control" id="input_to" placeholder="End Date">
+                            <label for="date_to">To</label>
+                            <input type="date" class="form-control" name ="date_to" id="date_to" placeholder="End Date">
                         </div>
                     </div>
 
@@ -137,7 +138,7 @@
                 <%
                     eTINCountApi eTInObj = new eTINCountApi();
                     int etinCount = eTInObj.getETinCountTillDate();
-                    out.print(etinCount+ " (Real Value)");
+                    out.print(etinCount);
                 %>
                 </p>
                 <p>e-TIN  Registration Done in above period:
@@ -148,11 +149,11 @@
                 <p>Total Return Submitted in above period  :
                     <%  eReturnCountPaymenttApi eRetObj = new eReturnCountPaymenttApi();
                         int eRetTotal = eRetObj.getERetTotalSubmission();
-                        out.print(eRetTotal+ " (Real Value)");
+                        out.print(eRetTotal);
                     %></p>
                 <p>Total Revenue Collection in above period:
                     <% float eRetTotalPay = eRetObj.getERetTotalPayment();
-                        out.print(eRetTotalPay+ " (Real Value)");
+                        out.print(eRetTotalPay);
                     %></p>
                 <p>Cumulative Revenue Collected This FY    :
                     <% out.print(eTINCountApi.getTinCollectionFY()+" BDT"); %></p>
@@ -193,14 +194,16 @@
                 </h4>
                 <div class="row">
                     <div class="col">
-                        <p>Total Collection Target :</p>
-                        <p>Total Revenue Collection:</p>
+                        <p>Total Collection Target : 100 Crore</p>
+                        <p>Total Revenue Collection:
+                            <% out.print(api.iVASByDateRangeApi.getSummaryCollection()+ " Crore BDT"); %>
+                        </p>
                         <p>IBAS++ Collection       :</p>
-                    </div>
-                    <div class="col">
-                        <p>Difference  :</p>
-                        <p> Achievement: by $</p>
-                        <p>Achievement : by %</p>
+<%--                    </div>--%>
+<%--                    <div class="col">--%>
+<%--                        <p>Difference  :</p>--%>
+<%--                        <p> Achievement: by $</p>--%>
+<%--                        <p>Achievement : by %</p>--%>
                     </div>
                 </div>
 
@@ -210,4 +213,9 @@
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        $("#date_from").datepicker();
+    });
+</script>
 </html>

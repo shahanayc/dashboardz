@@ -18,10 +18,10 @@
   </head>
 </head>
 <body>
-<a href="userform.jsp">registration</a>|
-<a href="login.jsp">login</a>|
-<a href="logout.jsp">logout</a>|
-<a href="revdashboard.jsp">Dashboard</a>
+<%--<a href="userform.jsp">registration</a>|--%>
+<%--<a href="login.jsp">login</a>|--%>
+<%--<a href="logout.jsp">logout</a>|--%>
+<%--<a href="revdashboard.jsp">Dashboard</a>--%>
 
 
 <section class="vh-880" style="background-color: #393f81;">

@@ -17,7 +17,8 @@ public class iVASBINCountApi {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private static String TOKEN ;
-    private static final String GET_URL = "http://vat.gov.bd/sap/opu/odata/sap/ZOD_ERP_INTERGRATION_SRV/GetTotalRevenueSet(TIMESTAMP='13.02.2023%2015%3A38%3A06')?$format=json";
+    private static final String GET_URL = globals.ivasApiUrl + "GetTotalRevenueSet(TIMESTAMP='13.02.2023%2015%3A38%3A06')?$format=json";
+
 
     private static final String POST_URL = "http://103.92.84.243/api/Auth/token";
 
@@ -32,13 +33,13 @@ public class iVASBINCountApi {
     private static int ivasCollectionMon;
     private static int ivasCollectionFY;
     private static int ivasIBASCollection;
-    private static int TOTAL_BIN_VAT;
-    private static int TOTAL_BIN_TOT;
-    private static int TOTAL_RETURN_9_1;
-    private static int TOTAL_RETURN_9_2;
-    private static double TOTAL_AMOUNT_SONALI;
-    private static double TOTAL_AMOUNT_BANGLADESH;
-    private static double TOTAL_AMOUNT_A_CHALLAN;
+    private static int TOTAL_BIN_VAT =0 ;
+    private static int TOTAL_BIN_TOT=0;
+    private static int TOTAL_RETURN_9_1 = 0;
+    private static int TOTAL_RETURN_9_2 = 0;
+    private static double TOTAL_AMOUNT_SONALI = 0.0;
+    private static double TOTAL_AMOUNT_BANGLADESH = 0.0;
+    private static double TOTAL_AMOUNT_A_CHALLAN = 0.0;
 
 
 //    //public int getETinCountTillDate(){
@@ -57,11 +58,13 @@ public class iVASBINCountApi {
 //    }
 
     public static int getBinCountTillToday() throws IOException {
-        //sendPOST();
-        System.out.println("POST DONE");
-        sendGET();
-        System.out.println("GET DONE");
-        System.out.println("ivas BIN API Get calllll %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*******");
+        if(TOTAL_BIN_VAT+TOTAL_BIN_TOT==0) {
+            //sendPOST();
+            System.out.println("POST DONE");
+            sendGET();
+            System.out.println("GET DONE");
+            System.out.println("ivas BIN API Get calllll %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*******");
+        }
         return (TOTAL_BIN_VAT+TOTAL_BIN_TOT);//binCountTillToday;
     }
     public static int getBinCountRange() throws IOException {
@@ -81,7 +84,7 @@ public class iVASBINCountApi {
 
     }
     public static double getIvasIBASCollection() throws IOException {
-        return 0;
+        return TOTAL_AMOUNT_A_CHALLAN;
     }
 
     public static void sendGET() throws IOException {

@@ -97,7 +97,7 @@
                     <%
                         eTINCountApi eTInObj = new eTINCountApi();
                         int etinCount = eTInObj.getETinCountTillDate();
-                        out.print(etinCount+ " (Real Value)");
+                        out.print(etinCount);
                     %>
                 </p>
                 <p>e-TIN  Registration Done in above period:
@@ -108,11 +108,11 @@
                 <p>Total Return Submitted in above period  :
                     <%  eReturnCountPaymenttApi eRetObj = new eReturnCountPaymenttApi();
                         int eRetTotal = eRetObj.getERetTotalSubmission();
-                        out.print(eRetTotal+ " (Real Value)");
+                        out.print(eRetTotal);
                     %></p>
                 <p>Total Revenue Collection in above period:
                     <% float eRetTotalPay = eRetObj.getERetTotalPayment();
-                        out.print(eRetTotalPay+ " (Real Value)");
+                        out.print(eRetTotalPay);
                     %></p>
                 <p>Cumulative Revenue Collected This FY    :
                     <% out.print(eTINCountApi.getTinCollectionFY()+" BDT"); %></p>
