@@ -21,6 +21,7 @@
 
 <%
 session.setAttribute("session","FALSE");
+  api.globals.setstEndDate(false);
 %>
 
 <%@ include file="index.jsp" %>

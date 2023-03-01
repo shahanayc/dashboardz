@@ -3,6 +3,7 @@
 <%@ page import="api.eReturnCountPaymenttApi"%>
 <%@ page import="api.globals" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +62,7 @@
                     <div class="col-auto">
                         <div class="form-group">
                             <label for="date_from">From</label>
-                            <input type="date" class="form-control" name ="date_from" id="date_from" placeholder="Start Date"
+                            <input type="date" class="form-control" name ="date_from" id="date_from" placeholder="Start Date" class="disableFuturedate"
                                    value="<% if(api.globals.isStEndDateSet())
                           {   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                               out.print(formatter.format(globals.StartDateGlobal)); }
@@ -71,7 +72,7 @@
                     <div class="col-auto">
                         <div class="form-group">
                             <label for="date_to">To</label>
-                            <input type="date" class="form-control" name ="date_to" id="date_to" placeholder="End Date"
+                            <input type="date" class="form-control" name ="date_to" id="date_to" placeholder="End Date" class="disableFuturedate"
                                    value="<% if(api.globals.isStEndDateSet())
                           {   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                               out.print(formatter.format(globals.EndDateGlobal)); }
@@ -167,7 +168,9 @@
                         out.print(eRetTotalPay);
                     %></p>
                 <p>Cumulative Revenue Collected This FY    :
-                    <% out.print(eTINCountApi.getTinCollectionFY()+" BDT"); %></p>
+                    <% DecimalFormat decfor = new DecimalFormat("0.00");
+                        double amount = eTINCountApi.getTinCollectionFY()/1000000000;
+                        out.print(decfor.format(amount)+" BDT"); %></p>
                 <p> IBAS++ Collections                     :
                     <% out.print(eTINCountApi.getTinIBASCollection() + " BDT"); %></p>
             </div>

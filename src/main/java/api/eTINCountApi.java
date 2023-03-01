@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class eTINCountApi {
 
@@ -64,8 +65,9 @@ public class eTINCountApi {
         return 65000;//TinCollectionMon;
 
     }
-    public static double getTinCollectionFY() throws IOException {
-        return 77000023;//TinCollectionFY;
+    public static Double getTinCollectionFY() throws IOException {
+        return 770000023.0;
+        // decfor.format(amount);
 
     }
     public static int getTinIBASCollection() throws IOException {

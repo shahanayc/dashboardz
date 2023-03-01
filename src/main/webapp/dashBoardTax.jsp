@@ -135,11 +135,13 @@
                     </div>
                 </h4>
                 <div class="row">
-                        <p>Total Collection Target :</p>
-                        <p>Total Revenue Collection:</p>
+                    <p>Total Collection Target : 100 Crore</p>
+                    <p>Total Revenue Collection:
+                        <% out.print(api.iVASByDateRangeApi.getSummaryCollection()+ " Crore BDT"); %>
+                    </p>
                         <p>IBAS++ Collection       :</p>
 
-                        <p>Difference  :</p>
+                        <p>Difference  : </p>
                         <p> Achievement: by $</p>
                         <p>Achievement : by %</p>
                 </div>

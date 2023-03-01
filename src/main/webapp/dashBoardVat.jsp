@@ -1,6 +1,8 @@
 <%@ page import = "java.io.*,java.util.*" %>
 <%@ page import="api.eTINCountApi"%>
 <%@ page import="api.eReturnCountPaymenttApi"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="api.globals" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,19 +49,28 @@
 <%--    <div class="container text-left">--%>
 <div class="row justify-content-center">
     <div class="col-lg-7">
-        <form action="#" class="row">
+        <form class="row" id="DateSearchFormObj" name="DateSearchFormObj" method="post" action="dateWiseReportProcess.jsp">
             <div class="col-auto">
                 <div class="form-group">
-                    <label for="input_from">From</label>
-                    <input type="text" class="form-control" id="input_from" placeholder="Start Date">
+                    <label for="date_from">From</label>
+                    <input type="date" class="form-control" name ="date_from" id="date_from" placeholder="Start Date"
+                           value="<% if(api.globals.isStEndDateSet())
+                          {   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                              out.print(formatter.format(globals.StartDateGlobal)); }
+                              else out.print(""); %>" >
                 </div>
             </div>
             <div class="col-auto">
                 <div class="form-group">
-                    <label for="input_to">To</label>
-                    <input type="text" class="form-control" id="input_to" placeholder="End Date">
+                    <label for="date_to">To</label>
+                    <input type="date" class="form-control" name ="date_to" id="date_to" placeholder="End Date"
+                           value="<% if(api.globals.isStEndDateSet())
+                          {   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                              out.print(formatter.format(globals.EndDateGlobal)); }
+                              else out.print(""); %>">
                 </div>
             </div>
+
             <div class="col-auto">
                 <div class="form-group">
                     <p></p>
@@ -103,7 +114,8 @@
                     %>
                 </p>
                 <p>BIN Registration Done in Above Period:
-                    <% out.print(api.iVASByDateRangeApi.getIvasRegistrationFY()); %>
+                    <%  api.iVASByDateRangeApi.setIvasRegistrationFY();
+                        out.print(api.iVASByDateRangeApi.getIvasRegInRange());   %>
                 </p>
                 <p>Return Submitted last month          :
                     <% out.print(api.iVASByDateRangeApi.getReturnCountLastMon() +" "); %>
@@ -131,8 +143,10 @@
                     </div>
                 </h4>
                 <div class="row">
-                        <p>Total Collection Target :</p>
-                        <p>Total Revenue Collection:</p>
+                    <p>Total Collection Target : 100 Crore</p>
+                    <p>Total Revenue Collection:
+                        <% out.print(api.iVASByDateRangeApi.getSummaryCollection()+ " Crore BDT"); %>
+                    </p>
                         <p>IBAS++ Collection       :</p>
 
                         <p>Difference  :</p>
