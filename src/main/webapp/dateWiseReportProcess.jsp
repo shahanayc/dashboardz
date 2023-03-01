@@ -11,6 +11,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="api.globals" %>
+<%@ page import="login.bean.messageAlert" %>
 <jsp:useBean id="DateSearchFormObj" class="api.dateReportBean"/>
 <jsp:setProperty property="*" name="DateSearchFormObj"/>
 
@@ -34,10 +35,17 @@
     Date startDate =new SimpleDateFormat("yyyy-MM-dd").parse(stDt);
     Date endDate =new SimpleDateFormat("yyyy-MM-dd").parse(endDt);
 //    out.print( date1 + "=> ");
-    api.globals.setStartDateGlobal(startDate);
-    api.globals.setEndDateGlobal(endDate);
-    api.globals.setstEndDate(true);
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+    if(startDate.compareTo(endDate) < 0) {
+        api.globals.setStartDateGlobal(startDate);
+        api.globals.setEndDateGlobal(endDate);
+        api.globals.setstEndDate(true);
+    }
+    else
+    {
+        api.globals.setstEndDate(false);
+        messageAlert.setDateRangeErrorID(1);
+    }
+//    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 //    out.print("=> another format: "+ formatter.format(startDate));
 %>
 <%--<jsp:include page="revdashboard.jsp"></jsp:include>--%>

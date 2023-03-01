@@ -4,6 +4,7 @@
 <%@ page import="api.globals" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.text.DecimalFormat" %>
+<%@ page import="login.bean.messageAlert" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +60,12 @@
             <div class="col-lg-7">
 <%--                <form action="#" class="row">--%>
                     <form class="row" id="DateSearchFormObj" name="DateSearchFormObj" method="post" action="dateWiseReportProcess.jsp">
-                    <div class="col-auto">
+                        <p class="text-danger">
+                            <% if(messageAlert.getDateRangeErrorID()>0){
+                                out.print(messageAlert.getDateRangeErrorMsg());
+                                messageAlert.setDateRangeErrorID(0);} %>
+                        </p>
+                        <div class="col-auto">
                         <div class="form-group">
                             <label for="date_from">From</label>
                             <input type="date" class="form-control" name ="date_from" id="date_from" placeholder="Start Date" class="disableFuturedate"
@@ -212,7 +218,9 @@
                         <p>Total Revenue Collection:
                             <% out.print(api.iVASByDateRangeApi.getSummaryCollection()+ " Crore BDT"); %>
                         </p>
-                        <p>IBAS++ Collection       :</p>
+                        <p>IBAS++ Collection       :
+                            <% out.print(api.iVASByDateRangeApi.getSummaryIBAS_Collection()+ " BDT"); %>
+                        </p>
 <%--                    </div>--%>
 <%--                    <div class="col">--%>
 <%--                        <p>Difference  :</p>--%>

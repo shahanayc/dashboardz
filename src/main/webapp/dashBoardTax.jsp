@@ -139,7 +139,9 @@
                     <p>Total Revenue Collection:
                         <% out.print(api.iVASByDateRangeApi.getSummaryCollection()+ " Crore BDT"); %>
                     </p>
-                        <p>IBAS++ Collection       :</p>
+                        <p>IBAS++ Collection       :
+                            <% out.print(api.iVASByDateRangeApi.getSummaryIBAS_Collection()+ " BDT"); %>
+                        </p>
 
                         <p>Difference  : </p>
                         <p> Achievement: by $</p>

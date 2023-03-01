@@ -225,6 +225,13 @@ public class iVASByDateRangeApi {
 
     }
 
+    public static Double getSummaryIBAS_Collection()throws IOException {
+        DecimalFormat decfor = new DecimalFormat("0.000");
+        double amount = (eTINCountApi.getTinCollectionFY() + TOTAL_AMOUNT_A_CHALLAN)/1000000000;
+        return (eTINCountApi.getTinIBASCollection() + TOTAL_AMOUNT_A_CHALLAN);// decfor.format(amount);
+
+    }
+
     public static double getIvasIBASCollection() throws IOException {
         return 0;
     }
