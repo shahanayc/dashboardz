@@ -9,6 +9,8 @@
 <%@page import="api.dateReportBean"%>
 <%@page import="login.bean.LoginDao"%>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="api.globals" %>
 <jsp:useBean id="DateSearchFormObj" class="api.dateReportBean"/>
 <jsp:setProperty property="*" name="DateSearchFormObj"/>
 
@@ -24,8 +26,20 @@
 //        System.out.println("\nEnd Date::::::::     "+ formatter.format( DateSearchFormObj.getEndDate()));
 %>
 
-<% out.print( request.getParameter("date_from") );
-    out.print( request.getParameter("date_to") ); %>
+<%
+    String stDt = request.getParameter("date_from");
+    String endDt = request.getParameter("date_to");
+//    out.print( request.getParameter("date_from") +"=> ");
+//     out.print( request.getParameter("date_to") +"=> ");
+    Date startDate =new SimpleDateFormat("yyyy-MM-dd").parse(stDt);
+    Date endDate =new SimpleDateFormat("yyyy-MM-dd").parse(endDt);
+//    out.print( date1 + "=> ");
+    api.globals.setStartDateGlobal(startDate);
+    api.globals.setEndDateGlobal(endDate);
+    api.globals.setstEndDate(true);
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+//    out.print("=> another format: "+ formatter.format(startDate));
+%>
 <%--<jsp:include page="revdashboard.jsp"></jsp:include>--%>
 
 

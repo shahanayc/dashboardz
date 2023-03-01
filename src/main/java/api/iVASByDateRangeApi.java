@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -28,6 +29,8 @@ public class iVASByDateRangeApi {
 
     private static int TOTAL_BIN_VAT;
     private static int TOTAL_BIN_TOT;
+    private static int TOTAL_BIN_VAT_inrange;
+    private static int TOTAL_BIN_TOT_inrange;
     private static int TOTAL_RETURN_9_1;
     private static int TOTAL_RETURN_9_2;
     private static int TOTAL_RETURN_9_1LM;
@@ -45,7 +48,7 @@ public class iVASByDateRangeApi {
 
     }
 
-    public static int getIvasRegistrationFY() throws IOException {
+    public static void setIvasRegistrationFY() throws IOException {
         if(TOTAL_BIN_VAT+TOTAL_BIN_TOT==0) {
             //sendPOST();
             System.out.println("POST NOO Need here for Basic Auth");
@@ -53,7 +56,15 @@ public class iVASByDateRangeApi {
             System.out.println("GET DONE");
             System.out.println("ivas BIN API Get calllll for Fiscal Year");
         }
-        return (TOTAL_BIN_VAT+TOTAL_BIN_TOT);//binCountTillToday;
+    }
+    public static int getIvasRegInRange() throws IOException {
+        int total_BIN = TOTAL_BIN_VAT + TOTAL_BIN_TOT;
+        if(globals.isStEndDateSet()) {
+            sendGETinRange();
+            System.out.println("GET DONE ## getIvasRegInRange ## within Date range");
+            total_BIN = TOTAL_BIN_VAT_inrange+TOTAL_BIN_TOT_inrange;
+        }
+        return (total_BIN);
     }
     public static int getBinCountRange() throws IOException {
         return 0;//binCountRange;
@@ -133,6 +144,68 @@ public class iVASByDateRangeApi {
             System.out.println("\n"+TOTAL_RETURN_9_2LM);
         } else {
             System.out.println("returnCount Last Month : GET request did not work.");
+        }
+
+    }
+
+    public static void sendGETinRange() throws IOException {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        String stDate = formatter.format(globals.StartDateGlobal);
+        String endDate = formatter.format(globals.EndDateGlobal);
+
+        String GET_URLinRange = globals.ivasApiUrl + "GetTotalRevenue_ParaSet(TIMESTAMP='',START_DATE='"+stDate+"',END_DATE='"+endDate+"')?$format=json";
+
+        System.out.println("\nInside sendGetLastMon: \n Year1="+ stDate+"Year 2: "+ endDate + "\n URL= "+GET_URLinRange);
+
+        URL obj = new URL(GET_URLinRange);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type","application/json");
+        con.setRequestProperty("Authorization", "Basic UmV2ZW51ZToxMjM0NTZhQDIwMjMjJA==" );
+
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.out.println(response.toString());
+
+            int stPos = response.indexOf("TOTAL_BIN_VAT\":")+16; //BIN Parsing
+            int endPos = response.indexOf("TOTAL_BIN_TOT")-3;
+            System.out.println("Start point: "+stPos +", end point: "+endPos);
+            char binCountCh[] = new char[8];
+            String binCountStr = new String();
+            response.getChars(stPos,endPos, binCountCh,0);
+            for (int i = 0; i < endPos-stPos; i++) {
+                binCountStr +=binCountCh[i];
+            }
+            System.out.println("Bin Count str "+binCountStr);
+            TOTAL_BIN_VAT_inrange=Integer.parseInt(binCountStr);
+            System.out.println("\n TOTAL_BIN_VAT_inrange:"+TOTAL_BIN_VAT_inrange);
+
+            stPos = response.indexOf("TOTAL_BIN_TOT")+16;  //TOT Parsing
+            endPos = response.indexOf("TOTAL_RETURN_9_1")-3;
+            System.out.println("Start point: "+stPos +", end point: "+endPos);
+            char totCountCh[] = new char[8];
+            String totCountStr = new String();
+            response.getChars(stPos,endPos, totCountCh,0);
+            for (int i = 0; i < endPos-stPos; i++) {
+                totCountStr +=totCountCh[i];
+            }
+            System.out.println("TOT Count str "+totCountStr);
+            TOTAL_BIN_TOT_inrange=Integer.parseInt(totCountStr);
+            System.out.println("\nTOTAL_BIN_TOT_inrange: "+TOTAL_BIN_TOT_inrange);
+
+        } else {
+            System.out.println("sendGETinRange() : GET request did not work.");
         }
 
     }
